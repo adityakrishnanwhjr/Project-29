@@ -56,7 +56,7 @@ function setup() {
   block16 = new Block(390,155,30,40);
   block25 = new Block(700,95,30,40);
 
-  slingshot = new Slingshot(polygon_img,{x:50,y:200});
+  slingshot = new Slingshot(polygon.body,{x:50,y:200});
   
 
 }
