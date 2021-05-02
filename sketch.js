@@ -7,7 +7,7 @@ var engine, world;
 var holder,ball,ground;
 var stand1,stand2;
 var ball;
-var slingshot;
+var slingShot;
 var polygon_img;
 function preload(){
   polygon_img=loadImage("polygon.png");
@@ -20,6 +20,10 @@ function setup() {
 
   polygon = Bodies.circle(50,200,20);
   World.add(world,polygon);
+
+  slingShot = new Slingshot(this.polygon,{x: 100,y: 200});
+
+
 
   ground = new Ground();
   stand1 = new Stand(390,300,250,10);
@@ -54,10 +58,7 @@ function setup() {
   block15 = new Block(420,195,30,40);
   //top
   block16 = new Block(390,155,30,40);
-  block25 = new Block(700,95,30,40);
-
-  slingshot = new Slingshot(polygon.body,{x:50,y:200});
-  
+  block25 = new Block(700,95,30,40);  
 
 }
 function draw() {
@@ -66,13 +67,13 @@ function draw() {
   textSize(20);
   fill("lightyellow");
   imageMode(CENTER);
-  image(polygon_img, polygon.position.x, polygon.position.y, 40,40);
+  image(polygon_img,polygon.position.x,polygon.position.y,40,40);
   
 
   ground.display();
   stand1.display();
   stand2.display();
-  slingshot.display();
+  slingShot.display();
 
   
   strokeWeight(2);
@@ -114,3 +115,12 @@ function draw() {
   block25.display();
 
 }
+
+function mouseDragged(){
+  Matter.Body.setPosition(this.polygon,{x: mouseX, y: mouseY});
+}
+
+function mouseReleased(){
+  slingShot.fly();
+}
+
